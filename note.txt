@@ -1,0 +1,4 @@
+RESOURCE:
+	- procedural art:
+		- https://deep-fold.itch.io/pixel-planet-generator
+		- https://github.com/Deep-Fold/PixelPlanets/tree/main

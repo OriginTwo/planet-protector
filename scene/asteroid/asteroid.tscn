@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://ddnk1u7s0ymgp"]
+
+[ext_resource type="Script" path="res://scene/component/health.gd" id="1_2yhnq"]
+[ext_resource type="Script" path="res://scene/asteroid/asteroid.gd" id="1_70c4o"]
+[ext_resource type="Shader" path="res://scene/asteroid/asteroid.gdshader" id="1_dgv8a"]
+[ext_resource type="Script" path="res://scene/component/hurtbox.gd" id="2_8tdjo"]
+[ext_resource type="Script" path="res://scene/component/hitbox.gd" id="3_pqiif"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tgxeu"]
+resource_local_to_scene = true
+shader = ExtResource("1_dgv8a")
+shader_parameter/pixels = null
+shader_parameter/rotation = 1.0
+shader_parameter/light_origin = Vector2(0.39, 0.39)
+shader_parameter/time_speed = 0.2
+shader_parameter/colors = null
+shader_parameter/size = 50.0
+shader_parameter/octaves = null
+shader_parameter/seed = null
+shader_parameter/should_dither = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3doud"]
+resource_local_to_scene = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jo2k2"]
+resource_local_to_scene = true
+
+[node name="Asteroid" type="Node2D"]
+script = ExtResource("1_70c4o")
+
+[node name="Visual" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_tgxeu")
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("hurtbox")]
+script = ExtResource("1_2yhnq")
+hurtbox = NodePath("../Hurtbox")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("2_8tdjo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_3doud")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+script = ExtResource("3_pqiif")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_jo2k2")

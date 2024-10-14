@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cx5gwvr3gw0cf"]
+
+[ext_resource type="Texture2D" uid="uid://b1tpq3imlh6wg" path="res://asset/cannon/cannon.png" id="1_ogj1c"]
+[ext_resource type="Script" path="res://scene/cannon/cannon.gd" id="1_qx8tt"]
+
+[node name="Cannon" type="Node2D"]
+script = ExtResource("1_qx8tt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(3, 0)
+texture = ExtResource("1_ogj1c")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(6, 0)

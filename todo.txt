@@ -1,0 +1,22 @@
+[ ] shoot cooldown for cannon
+[ ] larger asteroid has more health
+[ ] make the cannon have accleration
+[ ] background shader
+[ ] score
+- hit effect
+	[ ] flash
+	[ ] shake
+	[ ] particle
+	[ ] camera shake
+- difficulty curve
+	[ ] asteroid has more health as time goes on
+	[ ] asteroid spawn faster as time goes on
+- shop
+	[ ] one-time-use shield (can stack) (get more expensive each time)
+	[ ] more damage
+	[ ] 15 seconds fire rate boost
+	[ ] 20 seconds score boost
+[ ] sound
+
+[ ] main menu
+[ ] game over screen

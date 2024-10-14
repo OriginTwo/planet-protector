@@ -14,6 +14,11 @@ config/name="Planet Protector"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Palette="*res://scene/autoload/palette.gd"
+Global="*res://scene/autoload/global.gd"
+
 [display]
 
 window/size/viewport_width=384

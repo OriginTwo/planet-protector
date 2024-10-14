@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://d2fsu02rc373p"]
+
+[ext_resource type="Script" path="res://scene/component/health.gd" id="1_73iow"]
+[ext_resource type="Script" path="res://scene/planet/planet.gd" id="1_a3rbr"]
+[ext_resource type="Shader" path="res://scene/planet/land.gdshader" id="2_eyqxj"]
+[ext_resource type="Script" path="res://scene/component/hurtbox.gd" id="2_swwwl"]
+[ext_resource type="Shader" path="res://scene/planet/cloud.gdshader" id="3_0jsm4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n6p5k"]
+shader = ExtResource("2_eyqxj")
+shader_parameter/pixels = null
+shader_parameter/light_origin = Vector2(0.39, 0.39)
+shader_parameter/time_speed = 0.2
+shader_parameter/dither_size = 2.0
+shader_parameter/should_dither = true
+shader_parameter/light_border_1 = 0.4
+shader_parameter/light_border_2 = 0.5
+shader_parameter/river_cutoff = null
+shader_parameter/colors = null
+shader_parameter/size = 50.0
+shader_parameter/octaves = null
+shader_parameter/seed = null
+shader_parameter/time = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3bk1j"]
+shader = ExtResource("3_0jsm4")
+shader_parameter/pixels = null
+shader_parameter/cloud_cover = null
+shader_parameter/light_origin = Vector2(0.39, 0.39)
+shader_parameter/time_speed = 0.2
+shader_parameter/stretch = 2.0
+shader_parameter/cloud_curve = 1.3
+shader_parameter/light_border_1 = 0.52
+shader_parameter/light_border_2 = 0.62
+shader_parameter/colors = null
+shader_parameter/size = 50.0
+shader_parameter/octaves = null
+shader_parameter/seed = null
+shader_parameter/time = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yl5aq"]
+radius = 35.0
+
+[node name="Planet" type="Node2D"]
+script = ExtResource("1_a3rbr")
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Land" type="ColorRect" parent="Visual"]
+material = SubResource("ShaderMaterial_n6p5k")
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Cloud" type="ColorRect" parent="Visual"]
+material = SubResource("ShaderMaterial_3bk1j")
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("hurtbox")]
+script = ExtResource("1_73iow")
+hurtbox = NodePath("../Hurtbox")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_mask = 0
+monitoring = false
+script = ExtResource("2_swwwl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_yl5aq")

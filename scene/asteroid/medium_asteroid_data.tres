@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AsteroidSizeData" load_steps=5 format=3 uid="uid://cyitnclqo4db1"]
+
+[ext_resource type="Script" path="res://scene/asteroid/asteroid_size_data.gd" id="1_chwxl"]
+[ext_resource type="Texture2D" uid="uid://ur4x6baup2hk" path="res://asset/asteroid/mask_medium_1.png" id="1_jgj4d"]
+[ext_resource type="Texture2D" uid="uid://i7htcaagwjbn" path="res://asset/asteroid/mask_medium_2.png" id="2_phbjs"]
+[ext_resource type="Texture2D" uid="uid://brgkb6tk10ftg" path="res://asset/asteroid/mask_medium_3.png" id="3_la5n2"]
+
+[resource]
+script = ExtResource("1_chwxl")
+radius = 12.0
+linear_speed = 18.0
+angular_speed = 1.047
+mask_textures = Array[Texture2D]([ExtResource("1_jgj4d"), ExtResource("2_phbjs"), ExtResource("3_la5n2")])
