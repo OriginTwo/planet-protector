@@ -27,42 +27,16 @@ void fragment() {
 	float stripe = stripe_impact*sin((UV.y - stripe_angle*UV.x)*stripe_frequency);
 	n += stripe;
 	
+	// color
 	vec3 color = colors[3].rgb;
-	
-	if (false) {
-		if (n > 0.48) {
-			color = colors[2].rgb;
-		}
-		else if (n > 0.38) {
-			color = colors[1].rgb;
-		}
-		else if (n > 0.35) {
-			color = colors[0].rgb;
-		}
+	if (n > 0.48) {
+		color = colors[2].rgb;
 	}
-	else {
-		if (false) {
-			if (n > 0.48) {
-				color = colors[2].rgb;
-			}
-			else if (n > 0.38) {
-				color = colors[0].rgb;
-			}
-			else if (n > 0.35) {
-				color = colors[1].rgb;
-			}
-		}
-		else {
-			if (n > 0.48) {
-				color = colors[0].rgb;
-			}
-			else if (n > 0.38) {
-				color = colors[1].rgb;
-			}
-			else if (n > 0.35) {
-				color = colors[2].rgb;
-			}
-		}
+	else if (n > 0.38) {
+		color = colors[1].rgb;
+	}
+	else if (n > 0.35) {
+		color = colors[0].rgb;
 	}
 	
 	COLOR = vec4(color.rgb, 1);
