@@ -1,5 +1,7 @@
 extends Node2D
 
+const EXPLOSION_SCENE := preload("res://scene/cannon/projectile_explosion.tscn")
+
 const SPEED: float = 200
 
 @onready var lifetime_timer: Timer = $LifetimeTimer
@@ -11,14 +13,18 @@ func _ready() -> void:
 	lifetime_timer.timeout.connect(_on_lifetime_timeout)
 	hitbox.hit.connect(_on_hitbox_hit)
 
-func _draw() -> void:
-	draw_circle(Vector2.ZERO, 2, Color.ORANGE)
-
 func _process(delta: float) -> void:
 	global_position += direction*SPEED*delta
+	global_rotation = direction.angle()
 
 func _on_lifetime_timeout() -> void:
 	queue_free()
+	var explosion := EXPLOSION_SCENE.instantiate()
+	get_tree().get_first_node_in_group("effects").add_child(explosion)
+	explosion.global_position = global_position
 
 func _on_hitbox_hit() -> void:
 	queue_free()
+	var explosion := EXPLOSION_SCENE.instantiate()
+	get_tree().get_first_node_in_group("effects").add_child(explosion)
+	explosion.global_position = global_position

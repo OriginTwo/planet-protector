@@ -52,7 +52,7 @@ func setup_space() -> void:
 func spawn_star(is_initial: bool = false) -> void:
 	var viewport_size := get_viewport_rect().size
 	var star := STAR_SCENE.instantiate()
-	add_child(star)
+	call_deferred("add_child", star)
 	star.global_position = Vector2(
 		randf_range(star_spawn_padding, viewport_size.x - star_spawn_padding),
 		randf_range(star_spawn_padding, viewport_size.y - star_spawn_padding)

@@ -1,14 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://ddnk1u7s0ymgp"]
+[gd_scene load_steps=10 format=3 uid="uid://ddnk1u7s0ymgp"]
 
 [ext_resource type="Script" path="res://scene/component/health.gd" id="1_2yhnq"]
 [ext_resource type="Script" path="res://scene/asteroid/asteroid.gd" id="1_70c4o"]
 [ext_resource type="Shader" path="res://scene/asteroid/asteroid.gdshader" id="1_dgv8a"]
 [ext_resource type="Script" path="res://scene/component/hurtbox.gd" id="2_8tdjo"]
 [ext_resource type="Script" path="res://scene/component/hitbox.gd" id="3_pqiif"]
+[ext_resource type="Script" path="res://scene/component/shake.gd" id="6_skpl7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tgxeu"]
 resource_local_to_scene = true
 shader = ExtResource("1_dgv8a")
+shader_parameter/flash = false
 shader_parameter/pixels = null
 shader_parameter/rotation = 1.0
 shader_parameter/light_origin = Vector2(0.39, 0.39)
@@ -36,6 +38,11 @@ offset_bottom = 40.0
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("hurtbox")]
 script = ExtResource("1_2yhnq")
 hurtbox = NodePath("../Hurtbox")
+
+[node name="Shake" type="Node" parent="." node_paths=PackedStringArray("node")]
+script = ExtResource("6_skpl7")
+node = NodePath("../Visual")
+shake_duration = 0.2
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2

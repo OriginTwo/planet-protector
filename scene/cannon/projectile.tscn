@@ -1,15 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://c75r8pwbf18mw"]
+[gd_scene load_steps=5 format=3 uid="uid://c75r8pwbf18mw"]
 
 [ext_resource type="Script" path="res://scene/cannon/projectile.gd" id="1_6ejwf"]
 [ext_resource type="Script" path="res://scene/component/hitbox.gd" id="1_7u7lr"]
+[ext_resource type="Texture2D" uid="uid://bq7funb5xdq1y" path="res://asset/cannon/projectile.png" id="2_g333w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6cons"]
-radius = 2.0
+radius = 3.0
 
 [node name="Projectile" type="Node2D"]
 script = ExtResource("1_6ejwf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_g333w")
 
 [node name="LifetimeTimer" type="Timer" parent="."]
 wait_time = 0.5

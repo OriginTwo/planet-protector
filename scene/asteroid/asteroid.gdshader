@@ -1,6 +1,7 @@
 shader_type canvas_item;
 render_mode blend_mix;
 
+uniform bool flash = false;
 uniform sampler2D mask : source_color, filter_nearest;
 uniform float pixels : hint_range(10,100);
 uniform float rotation : hint_range(0.0, 6.28) = 1.0;
@@ -72,54 +73,59 @@ float crater(vec2 uv) {
 }
 
 void fragment() {
-	//pixelize uv
-	vec2 uv = floor(UV*pixels)/pixels;
-	
-	// we use this val later to interpolate between shades
-	bool dith = dither(uv, UV);
-	
-	// distance from center
-	float d = distance(uv, vec2(0.5));
-	
-	// optional rotation, do this after the dither or the dither will look very messed up
-	uv = rotate(uv, rotation);
-	
-	// two noise values with one slightly offset according to light source, to create shadows later
-	float n = fbm(uv * size);
-	float n2 = fbm(uv * size + (rotate(light_origin, rotation)-0.5) * 0.5);
-	
-	// step noise values to determine where the edge of the asteroid is
-	// step cutoff value depends on distance from center
-	float n_step = step(0.2, n - d);
-	float n2_step = step(0.2, n2 - d);
-	
-	// with this val we can determine where the shadows should be
-	float noise_rel = (n2_step + n2) - (n_step + n);
-	
-	// two crater values, again one extra for the shadows
-	float c1 = crater(uv );
-	float c2 = crater(uv + (light_origin-0.5)*0.03);
+	if (flash) {
+		float mask_value = texture(mask, UV).r;
+		COLOR = vec4(1.0, 1.0, 1.0, mask_value);
+	} else {
+		//pixelize uv
+		vec2 uv = floor(UV*pixels)/pixels;
+		
+		// we use this val later to interpolate between shades
+		bool dith = dither(uv, UV);
+		
+		// distance from center
+		float d = distance(uv, vec2(0.5));
+		
+		// optional rotation, do this after the dither or the dither will look very messed up
+		uv = rotate(uv, rotation);
+		
+		// two noise values with one slightly offset according to light source, to create shadows later
+		float n = fbm(uv * size);
+		float n2 = fbm(uv * size + (rotate(light_origin, rotation)-0.5) * 0.5);
+		
+		// step noise values to determine where the edge of the asteroid is
+		// step cutoff value depends on distance from center
+		float n_step = step(0.2, n - d);
+		float n2_step = step(0.2, n2 - d);
+		
+		// with this val we can determine where the shadows should be
+		float noise_rel = (n2_step + n2) - (n_step + n);
+		
+		// two crater values, again one extra for the shadows
+		float c1 = crater(uv );
+		float c2 = crater(uv + (light_origin-0.5)*0.03);
 
-	// now we just assign colors depending on noise values and crater values
-	// base
-	vec4 col = colors[1];
-	
-	// noise
-	if (noise_rel < -0.06 || (noise_rel < -0.04 && (dith || !should_dither))) {
-		col = colors[0];
+		// now we just assign colors depending on noise values and crater values
+		// base
+		vec4 col = colors[1];
+		
+		// noise
+		if (noise_rel < -0.06 || (noise_rel < -0.04 && (dith || !should_dither))) {
+			col = colors[0];
+		}
+		if (noise_rel > 0.05 || (noise_rel > 0.03 && (dith || !should_dither))) {
+			col = colors[2];
+		}
+		
+		// crater
+		if (c1 > 0.4)  {
+			col = colors[1];
+		}
+		if (c2<c1) {
+			col = colors[2];
+		}
+		
+		float mask_value = texture(mask, UV).r;
+		COLOR = vec4(col.rgb, mask_value * col.a);
 	}
-	if (noise_rel > 0.05 || (noise_rel > 0.03 && (dith || !should_dither))) {
-		col = colors[2];
-	}
-	
-	// crater
-	if (c1 > 0.4)  {
-		col = colors[1];
-	}
-	if (c2<c1) {
-		col = colors[2];
-	}
-	
-	float mask_value = texture(mask, UV).r;
-	COLOR = vec4(col.rgb, mask_value * col.a);
 }

@@ -17,7 +17,8 @@ func _process(delta: float) -> void:
 	cloud.material.set_shader_parameter("time", shader_time)
 
 func _on_health_depleted() -> void:
-	get_tree().quit()
+	#get_tree().quit()
+	print("planet_dead")
 
 func randomize_visual() -> void:
 	var seed := randf_range(0, 10)

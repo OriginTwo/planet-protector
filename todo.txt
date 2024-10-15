@@ -6,8 +6,8 @@
 [X] larger asteroid has more health
 [X] score
 - hit effect
-	[ ] flash
-	[ ] shake
+	[X] flash
+	[X] shake
 	[ ] particle
 	[ ] camera shake
 - difficulty curve
@@ -18,6 +18,9 @@
 	[ ] more damage
 	[ ] 15 seconds fire rate boost
 	[ ] 20 seconds score boost
+	[ ] faster cannon brake
+	[ ] faster cannon acceleration
+	[ ] aoe damage when projectile explode
 [ ] sound
 
 [ ] main menu

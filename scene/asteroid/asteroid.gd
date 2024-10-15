@@ -3,24 +3,32 @@ extends Node2D
 @onready var visual: ColorRect = $Visual
 @onready var health: Health = $Health
 @onready var hitbox: Hitbox = $Hitbox
+@onready var shake: Shake = $Shake
 
 var linear_speed: float
 var angular_speed: float
 var score_amount: int
 
 func _ready() -> void:
+	health.changed.connect(_on_health_changed)
 	health.depleted.connect(_on_destroyed)
-	hitbox.hit.connect(_on_hitbox_hit)
+	hitbox.hit.connect(_on_hit)
 
 func _process(delta: float) -> void:
 	global_position += (-global_position).normalized()*linear_speed*delta
 	global_rotation += angular_speed*delta
 
+func _on_health_changed() -> void:
+	shake.shake()
+	visual.material.set_shader_parameter("flash", true)
+	await shake.finished
+	visual.material.set_shader_parameter("flash", false)
+
 func _on_destroyed() -> void:
 	queue_free()
 	Global.score += score_amount
 
-func _on_hitbox_hit() -> void:
+func _on_hit() -> void:
 	queue_free()
 
 func setup(radius: float, mask: Texture2D) -> void:
