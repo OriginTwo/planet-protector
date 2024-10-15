@@ -34,7 +34,7 @@ func randomize_visual() -> void:
 	cloud.size = Vector2((Global.PLANET_RADIUS + 2)*2, (Global.PLANET_RADIUS + 2)*2)
 	cloud.position = Vector2(-Global.PLANET_RADIUS - 2, -Global.PLANET_RADIUS - 2)
 	cloud.material.set_shader_parameter("pixels", (Global.PLANET_RADIUS + 2)*2)
-	cloud.material.set_shader_parameter("cloud_cover", randf_range(0.35, 0.5))
+	cloud.material.set_shader_parameter("cloud_cover", randf_range(0.35, 0.45))
 	cloud.material.set_shader_parameter("light_origin", Vector2(0.5, 0.5))
 	cloud.material.set_shader_parameter("time_speed", randf_range(0.15, 0.2))
 	cloud.material.set_shader_parameter("size", randf_range(4.5, 5.4))
