@@ -4,7 +4,7 @@
 [X] shoot cooldown for cannon
 [X] make the cannon have accleration
 [X] larger asteroid has more health
-[ ] score
+[X] score
 - hit effect
 	[ ] flash
 	[ ] shake

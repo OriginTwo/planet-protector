@@ -6,6 +6,7 @@ extends Node2D
 
 var linear_speed: float
 var angular_speed: float
+var score_amount: int
 
 func _ready() -> void:
 	health.depleted.connect(_on_destroyed)
@@ -17,6 +18,7 @@ func _process(delta: float) -> void:
 
 func _on_destroyed() -> void:
 	queue_free()
+	Global.score += score_amount
 
 func _on_hitbox_hit() -> void:
 	queue_free()

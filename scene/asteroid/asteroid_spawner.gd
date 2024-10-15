@@ -21,4 +21,5 @@ func _on_spawn() -> void:
 	asteroid.health.max_health = size_data.health
 	asteroid.linear_speed = size_data.linear_speed
 	asteroid.angular_speed = size_data.angular_speed
+	asteroid.score_amount = size_data.score_amount
 	asteroid.setup(size_data.radius, size_data.mask_textures.pick_random())
