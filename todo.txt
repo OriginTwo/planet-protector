@@ -1,6 +1,6 @@
 - background shader
 	[X] background
-	[ ] stars
+	[X] stars
 [ ] shoot cooldown for cannon
 [ ] larger asteroid has more health
 [ ] make the cannon have accleration
