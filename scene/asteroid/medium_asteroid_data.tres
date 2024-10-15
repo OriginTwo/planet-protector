@@ -7,6 +7,7 @@
 
 [resource]
 script = ExtResource("1_chwxl")
+health = 2
 radius = 12.0
 linear_speed = 18.0
 angular_speed = 1.047
