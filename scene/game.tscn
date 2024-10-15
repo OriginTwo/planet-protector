@@ -1,46 +1,30 @@
-[gd_scene load_steps=9 format=3 uid="uid://d4ksmpked6pyl"]
+[gd_scene load_steps=5 format=3 uid="uid://d4ksmpked6pyl"]
 
 [ext_resource type="PackedScene" uid="uid://bkusnknrqkqwv" path="res://scene/asteroid/asteroid_spawner.tscn" id="1_20cmi"]
 [ext_resource type="PackedScene" uid="uid://d2fsu02rc373p" path="res://scene/planet/planet.tscn" id="1_85ida"]
 [ext_resource type="PackedScene" uid="uid://cx5gwvr3gw0cf" path="res://scene/cannon/cannon.tscn" id="3_oe5xk"]
-[ext_resource type="Shader" path="res://scene/space.gdshader" id="4_ij87d"]
-[ext_resource type="Script" path="res://scene/space.gd" id="5_vp7i7"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ajwie"]
-frequency = 0.02
-metadata/_preview_in_3d_space_ = true
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u4lsv"]
-width = 256
-height = 256
-seamless = true
-noise = SubResource("FastNoiseLite_ajwie")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dk8l6"]
-shader = ExtResource("4_ij87d")
-shader_parameter/time = 0.0
-shader_parameter/time_scale = 0.025
-shader_parameter/colors = null
-shader_parameter/stripe_angle = -1.0
-shader_parameter/stripe_impact = 0.1
-shader_parameter/stripe_frequency = 50.0
-shader_parameter/noise = SubResource("NoiseTexture2D_u4lsv")
+[ext_resource type="PackedScene" uid="uid://b5gp6t0als4if" path="res://scene/background/background.tscn" id="4_s43da"]
 
 [node name="Game" type="Node"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_dk8l6")
-offset_left = -192.0
-offset_top = -120.0
-offset_right = 192.0
-offset_bottom = 120.0
-script = ExtResource("5_vp7i7")
+[node name="SubViewport" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="AsteroidSpawner" parent="." instance=ExtResource("1_20cmi")]
+[node name="SubViewport" type="SubViewport" parent="SubViewport"]
+size = Vector2i(384, 240)
 
-[node name="Planet" parent="." instance=ExtResource("1_85ida")]
+[node name="Background" parent="SubViewport/SubViewport" instance=ExtResource("4_s43da")]
 
-[node name="Camera2D" type="Camera2D" parent="Planet"]
+[node name="AsteroidSpawner" parent="SubViewport/SubViewport" instance=ExtResource("1_20cmi")]
 
-[node name="Cannon" parent="." instance=ExtResource("3_oe5xk")]
-visible = false
+[node name="Planet" parent="SubViewport/SubViewport" instance=ExtResource("1_85ida")]
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport/SubViewport/Planet"]
+
+[node name="Cannon" parent="SubViewport/SubViewport" instance=ExtResource("3_oe5xk")]
+
+[node name="Projectiles" type="Node" parent="SubViewport/SubViewport" groups=["projectiles"]]

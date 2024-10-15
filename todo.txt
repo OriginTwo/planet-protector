@@ -1,6 +1,5 @@
 - background shader
 	[X] background
-	[ ] finalize background color
 	[ ] stars
 [ ] shoot cooldown for cannon
 [ ] larger asteroid has more health

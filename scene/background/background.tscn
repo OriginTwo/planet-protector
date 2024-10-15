@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5gp6t0als4if"]
+
+[ext_resource type="Script" path="res://scene/background/background.gd" id="1_11ryu"]
+[ext_resource type="Shader" path="res://scene/background/space.gdshader" id="1_vf1qt"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_iicrc"]
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_keow8"]
+width = 256
+height = 256
+seamless = true
+noise = SubResource("FastNoiseLite_iicrc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vop76"]
+shader = ExtResource("1_vf1qt")
+shader_parameter/time = 0.0
+shader_parameter/time_scale = 0.2
+shader_parameter/colors = null
+shader_parameter/stripe_angle = -1.0
+shader_parameter/stripe_impact = 0.1
+shader_parameter/stripe_frequency = 50.0
+shader_parameter/noise = SubResource("NoiseTexture2D_keow8")
+
+[node name="Background" type="Node2D"]
+script = ExtResource("1_11ryu")
+
+[node name="Space" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_vop76")
+offset_right = 40.0
+offset_bottom = 40.0
