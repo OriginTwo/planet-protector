@@ -24,7 +24,7 @@ func _on_lifetime_timeout() -> void:
 	explosion.global_position = global_position
 	
 	$Sprite2D.hide()
-	hitbox.set_deferred("monitoring", false)
+	hitbox.set_enabled(false)
 	timeout_sound.play()
 	await timeout_sound.finished
 	queue_free()

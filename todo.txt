@@ -9,7 +9,7 @@
 	[X] flash
 	[X] shake
 	[ ] particle
-	[ ] camera shake
+	[X] camera shake
 - difficulty curve
 	[ ] asteroid has more health as time goes on
 	[ ] asteroid spawn faster as time goes on
@@ -25,3 +25,7 @@
 
 [ ] main menu
 [ ] game over screen
+settings
+	[ ] disable hitstop
+	[ ] disable camera shake
+	[ ] volume

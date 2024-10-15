@@ -21,7 +21,7 @@ func _on_health_depleted() -> void:
 	print("planet_dead")
 
 func randomize_visual() -> void:
-	var seed := randf_range(0, 10)
+	var sd := randf_range(0, 10)
 	
 	land.size = Vector2(Global.PLANET_RADIUS*2, Global.PLANET_RADIUS*2)
 	land.position = Vector2(-Global.PLANET_RADIUS, -Global.PLANET_RADIUS)
@@ -30,7 +30,7 @@ func randomize_visual() -> void:
 	land.material.set_shader_parameter("time_speed", randf_range(0.15, 0.2))
 	land.material.set_shader_parameter("size", randf_range(4.5, 5.4))
 	land.material.set_shader_parameter("octaves", 20)
-	land.material.set_shader_parameter("seed", seed)
+	land.material.set_shader_parameter("seed", sd)
 	
 	cloud.size = Vector2((Global.PLANET_RADIUS + 2)*2, (Global.PLANET_RADIUS + 2)*2)
 	cloud.position = Vector2(-Global.PLANET_RADIUS - 2, -Global.PLANET_RADIUS - 2)
@@ -40,7 +40,7 @@ func randomize_visual() -> void:
 	cloud.material.set_shader_parameter("time_speed", randf_range(0.15, 0.2))
 	cloud.material.set_shader_parameter("size", randf_range(4.5, 5.4))
 	cloud.material.set_shader_parameter("octaves", 20)
-	cloud.material.set_shader_parameter("seed", seed)
+	cloud.material.set_shader_parameter("seed", sd)
 	
 	# randomize color
 	var seed_colors := Palette.generate(randi()%2 + 3, randf_range(0.7, 1.0), randf_range(0.45, 0.55))

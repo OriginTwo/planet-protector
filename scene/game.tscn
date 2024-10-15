@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://d4ksmpked6pyl"]
+[gd_scene load_steps=6 format=3 uid="uid://d4ksmpked6pyl"]
 
 [ext_resource type="PackedScene" uid="uid://bkusnknrqkqwv" path="res://scene/asteroid/asteroid_spawner.tscn" id="1_20cmi"]
 [ext_resource type="PackedScene" uid="uid://d2fsu02rc373p" path="res://scene/planet/planet.tscn" id="1_85ida"]
 [ext_resource type="PackedScene" uid="uid://cx5gwvr3gw0cf" path="res://scene/cannon/cannon.tscn" id="3_oe5xk"]
+[ext_resource type="Script" path="res://scene/component/shaky_camera.gd" id="4_mbes2"]
 [ext_resource type="PackedScene" uid="uid://b5gp6t0als4if" path="res://scene/background/background.tscn" id="4_s43da"]
 
 [node name="Game" type="Node"]
@@ -26,7 +27,8 @@ render_target_update_mode = 4
 
 [node name="Planet" parent="SubViewport/SubViewport" instance=ExtResource("1_85ida")]
 
-[node name="Camera2D" type="Camera2D" parent="SubViewport/SubViewport/Planet"]
+[node name="ShakyCamera" type="Camera2D" parent="SubViewport/SubViewport/Planet" groups=["shaky_camera"]]
+script = ExtResource("4_mbes2")
 
 [node name="Cannon" parent="SubViewport/SubViewport" instance=ExtResource("3_oe5xk")]
 

@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var visual: ColorRect = $Visual
+@onready var visual: ColorRect = $Visual/ColorRect
 @onready var health: Health = $Health
 @onready var hurtbox: Hurtbox = $Hurtbox
 @onready var hitbox: Hitbox = $Hitbox
@@ -29,11 +29,14 @@ func _on_hurt(_hitbox: Hitbox) -> void:
 	visual.material.set_shader_parameter("flash", false)
 
 func _on_destroyed() -> void:
+	HitstopManager.shake_camera()
+	HitstopManager.hitstop()
+	
 	Global.score += score_amount
 	destroyed_sound.play()
 	visual.hide()
-	hitbox.set_deferred("monitoring", false)
-	$Hurtbox.set_deferred("monitorable", false)
+	hitbox.set_enabled(false)
+	hurtbox.set_enabled(false)
 	await destroyed_sound.finished
 	queue_free()
 

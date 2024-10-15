@@ -5,6 +5,9 @@ signal hit()
 
 @export var damage: int = 1
 
+func set_enabled(value: bool) -> void:
+	set_deferred("monitoring", value)
+
 func _ready() -> void:
 	area_entered.connect(_on_hurtbox_entered)
 

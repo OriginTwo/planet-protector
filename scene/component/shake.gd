@@ -3,7 +3,7 @@ extends Node
 
 signal finished()
 
-@export var node: Control
+@export var node: Node2D
 @export var shake_amount: float = 2.0
 @export var shake_duration: float = 0.4
 

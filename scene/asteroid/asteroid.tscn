@@ -35,7 +35,9 @@ format = 1
 [node name="Asteroid" type="Node2D"]
 script = ExtResource("1_70c4o")
 
-[node name="Visual" type="ColorRect" parent="."]
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Visual"]
 material = SubResource("ShaderMaterial_tgxeu")
 offset_right = 40.0
 offset_bottom = 40.0

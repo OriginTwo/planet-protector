@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 	space.material.set_shader_parameter("time", shader_time)
 
 func setup_space() -> void:
-	space.size = get_viewport_rect().size
+	space.size = get_viewport_rect().size + Vector2(16, 16) # padding for camera shake
 	space.position = -space.size/2
 	space.material.set_shader_parameter("time_scale", randf_range(0.015, 0.025))
 	space.material.set_shader_parameter("stripe_angle", randf_range(-PI/3, PI/3))

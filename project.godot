@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 
 Palette="*res://scene/autoload/palette.gd"
 Global="*res://scene/autoload/global.gd"
+HitstopManager="*res://scene/autoload/hitstop_manager.gd"
 
 [display]
 
