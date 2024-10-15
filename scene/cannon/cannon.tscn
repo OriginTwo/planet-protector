@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cx5gwvr3gw0cf"]
+[gd_scene load_steps=4 format=3 uid="uid://cx5gwvr3gw0cf"]
 
 [ext_resource type="Texture2D" uid="uid://b1tpq3imlh6wg" path="res://asset/cannon/cannon.png" id="1_ogj1c"]
 [ext_resource type="Script" path="res://scene/cannon/cannon.gd" id="1_qx8tt"]
+[ext_resource type="AudioStream" uid="uid://c4cai3xnk8500" path="res://asset/cannon/shoot.wav" id="3_qfyi3"]
 
 [node name="Cannon" type="Node2D"]
 script = ExtResource("1_qx8tt")
@@ -16,3 +17,7 @@ position = Vector2(6, 0)
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qfyi3")
+volume_db = -6.0

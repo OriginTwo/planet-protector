@@ -2,31 +2,40 @@ extends Node2D
 
 @onready var visual: ColorRect = $Visual
 @onready var health: Health = $Health
+@onready var hurtbox: Hurtbox = $Hurtbox
 @onready var hitbox: Hitbox = $Hitbox
 @onready var shake: Shake = $Shake
+@onready var hurt_sound: AudioStreamPlayer = $HurtSound
+@onready var destroyed_sound: AudioStreamPlayer = $DestroyedSound
 
 var linear_speed: float
 var angular_speed: float
 var score_amount: int
 
 func _ready() -> void:
-	health.changed.connect(_on_health_changed)
 	health.depleted.connect(_on_destroyed)
+	hurtbox.hurt.connect(_on_hurt)
 	hitbox.hit.connect(_on_hit)
 
 func _process(delta: float) -> void:
 	global_position += (-global_position).normalized()*linear_speed*delta
 	global_rotation += angular_speed*delta
 
-func _on_health_changed() -> void:
+func _on_hurt(_hitbox: Hitbox) -> void:
 	shake.shake()
+	hurt_sound.play()
 	visual.material.set_shader_parameter("flash", true)
 	await shake.finished
 	visual.material.set_shader_parameter("flash", false)
 
 func _on_destroyed() -> void:
-	queue_free()
 	Global.score += score_amount
+	destroyed_sound.play()
+	visual.hide()
+	hitbox.set_deferred("monitoring", false)
+	$Hurtbox.set_deferred("monitorable", false)
+	await destroyed_sound.finished
+	queue_free()
 
 func _on_hit() -> void:
 	queue_free()

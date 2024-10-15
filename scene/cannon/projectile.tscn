@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c75r8pwbf18mw"]
+[gd_scene load_steps=6 format=3 uid="uid://c75r8pwbf18mw"]
 
 [ext_resource type="Script" path="res://scene/cannon/projectile.gd" id="1_6ejwf"]
 [ext_resource type="Script" path="res://scene/component/hitbox.gd" id="1_7u7lr"]
 [ext_resource type="Texture2D" uid="uid://bq7funb5xdq1y" path="res://asset/cannon/projectile.png" id="2_g333w"]
+[ext_resource type="AudioStream" uid="uid://b8bsr8lu4yope" path="res://asset/cannon/timeout.wav" id="4_e4kvh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6cons"]
 radius = 3.0
@@ -26,3 +27,7 @@ script = ExtResource("1_7u7lr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_6cons")
+
+[node name="TimeoutSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_e4kvh")
+volume_db = -6.5

@@ -8,6 +8,7 @@ const FRICTION: float = MAX_SPEED
 @onready var projectiles := get_tree().get_first_node_in_group("projectiles")
 @onready var muzzle: Marker2D = $Muzzle
 @onready var shoot_cooldown_timer: Timer = $ShootCooldownTimer
+@onready var shoot_sound: AudioStreamPlayer = $ShootSound
 
 var speed: float = 0
 var angle: float = PI/2
@@ -31,3 +32,4 @@ func _process(delta: float) -> void:
 		projectile.global_position = muzzle.global_position
 		projectile.direction = Vector2.from_angle(-angle)
 		shoot_cooldown_timer.start()
+		shoot_sound.play()

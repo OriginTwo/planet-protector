@@ -21,7 +21,7 @@
 	[ ] faster cannon brake
 	[ ] faster cannon acceleration
 	[ ] aoe damage when projectile explode
-[ ] sound
+[X] sound
 
 [ ] main menu
 [ ] game over screen
