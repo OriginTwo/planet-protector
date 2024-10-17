@@ -1,37 +1,46 @@
-[gd_scene load_steps=6 format=3 uid="uid://d4ksmpked6pyl"]
+[gd_scene load_steps=7 format=3 uid="uid://d4ksmpked6pyl"]
 
 [ext_resource type="PackedScene" uid="uid://bkusnknrqkqwv" path="res://scene/asteroid/asteroid_spawner.tscn" id="1_20cmi"]
 [ext_resource type="PackedScene" uid="uid://d2fsu02rc373p" path="res://scene/planet/planet.tscn" id="1_85ida"]
 [ext_resource type="PackedScene" uid="uid://cx5gwvr3gw0cf" path="res://scene/cannon/cannon.tscn" id="3_oe5xk"]
 [ext_resource type="Script" path="res://scene/component/shaky_camera.gd" id="4_mbes2"]
 [ext_resource type="PackedScene" uid="uid://b5gp6t0als4if" path="res://scene/background/background.tscn" id="4_s43da"]
+[ext_resource type="PackedScene" uid="uid://d2ejxugad3uje" path="res://scene/ui/shop_ui.tscn" id="6_4j5fu"]
 
 [node name="Game" type="Node"]
 
-[node name="SubViewport" type="SubViewportContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
-[node name="SubViewport" type="SubViewport" parent="SubViewport"]
+[node name="GameViewport" type="SubViewportContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/GameViewport"]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(384, 240)
+size = Vector2i(240, 240)
 render_target_update_mode = 4
 
-[node name="Background" parent="SubViewport/SubViewport" instance=ExtResource("4_s43da")]
+[node name="Background" parent="HBoxContainer/GameViewport/SubViewport" instance=ExtResource("4_s43da")]
 
-[node name="AsteroidSpawner" parent="SubViewport/SubViewport" instance=ExtResource("1_20cmi")]
+[node name="AsteroidSpawner" parent="HBoxContainer/GameViewport/SubViewport" instance=ExtResource("1_20cmi")]
 
-[node name="Planet" parent="SubViewport/SubViewport" instance=ExtResource("1_85ida")]
+[node name="Planet" parent="HBoxContainer/GameViewport/SubViewport" instance=ExtResource("1_85ida")]
 
-[node name="ShakyCamera" type="Camera2D" parent="SubViewport/SubViewport/Planet" groups=["shaky_camera"]]
+[node name="ShakyCamera" type="Camera2D" parent="HBoxContainer/GameViewport/SubViewport/Planet" groups=["shaky_camera"]]
 script = ExtResource("4_mbes2")
 
-[node name="Cannon" parent="SubViewport/SubViewport" instance=ExtResource("3_oe5xk")]
+[node name="Cannon" parent="HBoxContainer/GameViewport/SubViewport" instance=ExtResource("3_oe5xk")]
 
-[node name="Projectiles" type="Node2D" parent="SubViewport/SubViewport" groups=["projectiles"]]
+[node name="Projectiles" type="Node2D" parent="HBoxContainer/GameViewport/SubViewport" groups=["projectiles"]]
 
-[node name="Effects" type="Node2D" parent="SubViewport/SubViewport" groups=["effects"]]
+[node name="Effects" type="Node2D" parent="HBoxContainer/GameViewport/SubViewport" groups=["effects"]]
+
+[node name="ShopUI" parent="HBoxContainer" instance=ExtResource("6_4j5fu")]
+layout_mode = 2
+size_flags_horizontal = 3

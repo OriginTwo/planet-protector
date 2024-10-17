@@ -1,0 +1,24 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dqgtolhoyp2dd"]
+
+[ext_resource type="FontFile" uid="uid://b1skl5ig43fbq" path="res://asset/ui/Kenney Mini.ttf" id="1_65y2u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2awlm"]
+bg_color = Color(0.188235, 0.188235, 0.188235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wd0fb"]
+content_margin_left = 3.0
+content_margin_top = 0.0
+content_margin_right = 3.0
+content_margin_bottom = 0.0
+bg_color = Color(0.25098, 0.25098, 0.25098, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[resource]
+default_font = ExtResource("1_65y2u")
+default_font_size = 8
+Panel/styles/panel = null
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_2awlm")
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_wd0fb")

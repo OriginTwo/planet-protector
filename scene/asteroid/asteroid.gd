@@ -30,7 +30,6 @@ func _on_hurt(_hitbox: Hitbox) -> void:
 
 func _on_destroyed() -> void:
 	HitstopManager.shake_camera()
-	HitstopManager.hitstop()
 	
 	Global.score += score_amount
 	destroyed_sound.play()
