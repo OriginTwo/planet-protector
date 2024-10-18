@@ -6,6 +6,7 @@ extends PanelContainer
 @onready var price_label: Label = %PriceLabel
 @onready var limit_label: Label = %LimitLabel
 @onready var description_label: Label = %DescriptionLabel
+@onready var click_sound: AudioStreamPlayer = $ClickSound
 
 var amount_bought: int = 0
 
@@ -22,11 +23,12 @@ func _on_money_changed(new_value: int) -> void:
 	upgrade_button.disabled = new_value < upgrade_data.price || should_disable_button()
 
 func _on_upgrade_button_pressed() -> void:
+	amount_bought += 1
 	Global.upgrade_bought.emit(upgrade_data)
 	upgrade_data.price = int(float(upgrade_data.price)*upgrade_data.price_multiplier)
-	amount_bought += 1
 	price_label.text = "%d" % [upgrade_data.price]
 	update_limit_label()
+	click_sound.play()
 
 func should_disable_button() -> bool:
 	return upgrade_data.limit > 0 && amount_bought >= upgrade_data.limit

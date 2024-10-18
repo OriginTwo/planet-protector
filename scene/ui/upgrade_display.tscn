@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://421ypswabf2u"]
+[gd_scene load_steps=4 format=3 uid="uid://421ypswabf2u"]
 
 [ext_resource type="Theme" uid="uid://dqgtolhoyp2dd" path="res://scene/ui/ui_theme.tres" id="1_3ad6e"]
 [ext_resource type="Script" path="res://scene/ui/upgrade_display.gd" id="2_7a7ry"]
+[ext_resource type="AudioStream" uid="uid://dgcvnnyltltfe" path="res://asset/ui/click.wav" id="3_kkimq"]
 
 [node name="UpgradeDisplay" type="PanelContainer"]
 theme = ExtResource("1_3ad6e")
@@ -58,3 +59,8 @@ mouse_filter = 0
 text = "?"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_kkimq")
+volume_db = -8.0
+pitch_scale = 1.4

@@ -21,7 +21,7 @@
 	[ ] faster cannon acceleration
 	[X] more money
 [X] game sound
-[ ] ui sound
+[X] ui sound
 [ ] balance upgrades
 
 [ ] main menu
