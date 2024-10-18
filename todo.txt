@@ -19,9 +19,10 @@
 	[ ] faster fire rate
 	[ ] faster cannon brake
 	[ ] faster cannon acceleration
-	[ ] money boost
+	[X] more money
 [X] game sound
 [ ] ui sound
+[ ] balance upgrades
 
 [ ] main menu
 [ ] game over screen

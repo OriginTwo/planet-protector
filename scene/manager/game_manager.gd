@@ -10,6 +10,14 @@ var money: int :
 		money = value
 		Global.money_changed.emit(money)
 
+var income_multiplier: float = 1
+
+func increase_score(amount: int) -> void:
+	score += amount
+
+func increase_money(amount: int) -> void:
+	money += int(roundf(float(amount)*income_multiplier))
+
 func _ready() -> void:
 	add_to_group("game_manager")
 	
@@ -20,4 +28,16 @@ func _ready() -> void:
 
 func _on_upgrade_bought(upgrade: UpgradeData) -> void:
 	money -= upgrade.price
-	print("upgrade_bought: ", upgrade.name)
+	match upgrade.name:
+		"Planet Force Field":
+			print("spawn force_field")
+		"Cannon Acceleration":
+			print("increase cannon_accel")
+		"Cannon Brake":
+			print("increase cannon_brake")
+		"Cannon Rocket":
+			print("increase cannon_damage")
+		"Cannon Fire Rate":
+			print("increase cannon_fire_rate")
+		"Increase Income":
+			income_multiplier += 0.45

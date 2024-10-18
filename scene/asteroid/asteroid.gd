@@ -32,8 +32,8 @@ func _on_hurt(_hitbox: Hitbox) -> void:
 
 func _on_destroyed() -> void:
 	HitstopManager.shake_camera()
-	game_manager.score += data.score_amount
-	game_manager.money += data.money_amount
+	game_manager.increase_score(data.score_amount)
+	game_manager.increase_money(data.money_amount)
 	destroyed_sound.play()
 	visual.hide()
 	hitbox.set_enabled(false)
