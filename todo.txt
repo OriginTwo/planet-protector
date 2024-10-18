@@ -25,9 +25,5 @@
 [X] ui sound
 [ ] balance + playtest
 
-[ ] main menu
+[X] main menu
 [X] game over screen
-settings
-	[ ] disable hitstop
-	[ ] disable camera shake
-	[ ] volume

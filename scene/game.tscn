@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d4ksmpked6pyl"]
+[gd_scene load_steps=9 format=3 uid="uid://d4ksmpked6pyl"]
 
 [ext_resource type="Script" path="res://scene/manager/game_manager.gd" id="1_6cson"]
 [ext_resource type="PackedScene" uid="uid://bkusnknrqkqwv" path="res://scene/asteroid/asteroid_spawner.tscn" id="1_20cmi"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scene/component/shaky_camera.gd" id="4_mbes2"]
 [ext_resource type="PackedScene" uid="uid://b5gp6t0als4if" path="res://scene/background/background.tscn" id="4_s43da"]
 [ext_resource type="PackedScene" uid="uid://d2ejxugad3uje" path="res://scene/ui/shop_ui.tscn" id="6_4j5fu"]
+[ext_resource type="AudioStream" uid="uid://deyux63vwkm6d" path="res://asset/game_start.wav" id="8_gxyjn"]
 
 [node name="Game" type="Node"]
 
@@ -48,3 +49,8 @@ script = ExtResource("4_mbes2")
 [node name="ShopUI" parent="HBoxContainer" instance=ExtResource("6_4j5fu")]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="GameStartSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_gxyjn")
+volume_db = -6.0
+autoplay = true

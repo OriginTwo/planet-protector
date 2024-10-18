@@ -1,6 +1,8 @@
 class_name GameManager
 extends Node
 
+const GAME_OVER_SCENE := preload("res://scene/game_over.tscn")
+
 const FORCE_FIELD_SCENE := preload("res://scene/upgrade/force_field.tscn")
 
 var score: int :
@@ -38,7 +40,7 @@ func _on_game_over() -> void:
 	if Global.high_score < score:
 		Global.high_score = score
 	await get_tree().create_timer(1.5, true, false, true).timeout
-	get_tree().call_deferred("change_scene_to_file", "res://scene/game_over.tscn")
+	get_tree().call_deferred("change_scene_to_packed", GAME_OVER_SCENE)
 
 func _on_upgrade_bought(upgrade: UpgradeData) -> void:
 	var cannon := get_tree().get_first_node_in_group("cannon")

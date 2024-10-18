@@ -16,8 +16,7 @@ func _ready() -> void:
 	Global.save_data()
 
 func _on_retry_button_pressed() -> void:
-	$ClickSound.play()
 	get_tree().call_deferred("change_scene_to_file", "res://scene/game.tscn")
 
 func _on_main_menu_button_pressed() -> void:
-	$ClickSound.play()
+	get_tree().call_deferred("change_scene_to_file", "res://scene/main_menu.tscn")

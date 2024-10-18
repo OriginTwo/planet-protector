@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://borb8mwjc2xq8"]
+
+[ext_resource type="Theme" uid="uid://dqgtolhoyp2dd" path="res://scene/ui/ui_theme.tres" id="1_e4hgg"]
+[ext_resource type="PackedScene" uid="uid://b5gp6t0als4if" path="res://scene/background/background.tscn" id="2_dx1le"]
+[ext_resource type="Script" path="res://scene/main_menu.gd" id="2_sbqdv"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_e4hgg")
+script = ExtResource("2_sbqdv")
+
+[node name="Background" parent="." instance=ExtResource("2_dx1le")]
+max_star = 40
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_right = 384.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(1, 0.726563, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "PLANET PROTECTOR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighScoreLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.882353, 0.882353, 0.882353, 1)
+theme_override_font_sizes/font_size = 16
+text = "High Score: 999999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Play"
+
+[node name="CreditButton" type="Button" parent="CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Credit"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Quit"
