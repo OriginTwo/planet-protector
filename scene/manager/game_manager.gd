@@ -34,7 +34,11 @@ func _ready() -> void:
 	set_deferred("money", 0)
 
 func _on_game_over() -> void:
-	pass
+	Global.score = score
+	if Global.high_score < score:
+		Global.high_score = score
+	await get_tree().create_timer(1.5, true, false, true).timeout
+	get_tree().call_deferred("change_scene_to_file", "res://scene/game_over.tscn")
 
 func _on_upgrade_bought(upgrade: UpgradeData) -> void:
 	var cannon := get_tree().get_first_node_in_group("cannon")

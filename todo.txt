@@ -26,7 +26,7 @@
 [ ] balance + playtest
 
 [ ] main menu
-[ ] game over screen
+[X] game over screen
 settings
 	[ ] disable hitstop
 	[ ] disable camera shake

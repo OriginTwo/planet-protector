@@ -28,7 +28,6 @@ func _ready() -> void:
 	for i in max_star:
 		spawn_star(true)
 
-
 func _process(delta: float) -> void:
 	shader_time += delta
 	space.material.set_shader_parameter("time", shader_time)
@@ -50,6 +49,7 @@ func setup_space() -> void:
 	space.material.set_shader_parameter("colors", colors)
 
 func spawn_star(is_initial: bool = false) -> void:
+	await tree_entered
 	var viewport_size := get_viewport_rect().size
 	var star := STAR_SCENE.instantiate()
 	call_deferred("add_child", star)

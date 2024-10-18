@@ -25,6 +25,7 @@ func _process(delta: float) -> void:
 func _on_health_depleted() -> void:
 	$DestroyedSound.play()
 	$DestroyedParticle.emitting = true
+	hurtbox.set_enabled(false)
 	Engine.set_time_scale(0.2)
 	await $DestroyedSound.finished
 	land.hide()
