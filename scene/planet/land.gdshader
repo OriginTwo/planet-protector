@@ -1,6 +1,7 @@
 shader_type canvas_item;
 render_mode blend_mix;
 
+uniform bool flash = false;
 uniform float pixels;
 uniform vec2 light_origin;
 uniform float time_speed : hint_range(0.0, 1.0) = 0.2;
@@ -31,7 +32,7 @@ float rand(vec2 coord) {
 float noise(vec2 coord){
 	vec2 i = floor(coord);
 	vec2 f = fract(coord);
-		
+
 	float a = rand(i);
 	float b = rand(i + vec2(1.0, 0.0));
 	float c = rand(i + vec2(0.0, 1.0));
@@ -59,7 +60,7 @@ vec2 spherify(vec2 uv) {
 	float z = sqrt(1.0 - dot(centered.xy, centered.xy));
 //	float z = pow(1.0 - dot(centered.xy, centered.xy), 0.5);
 	vec2 sphere = centered/(z + 1.0);
-	
+
 	return sphere * 0.5+0.5;
 }
 
@@ -76,27 +77,27 @@ bool dither(vec2 uv1, vec2 uv2) {
 void fragment() {
 	// pixelize uv
 	vec2 uv = floor(UV*pixels)/pixels;
-	
+
 	bool dith = dither(uv, UV);
 	// stepping over 0.5 instead of 0.49999 makes some pixels a little buggy
 	float a = step(length(uv-vec2(0.5)), 0.49999);
-	
+
 	// map to sphere
 	uv = spherify(uv);
 	float d_light = distance(uv , light_origin);
-	
+
 	// some scrolling noise for landmasses
 	vec2 base_fbm_uv = (uv)*size+vec2(time*time_speed,0.0);
-	
+
 	// use multiple fbm's at different places so we can determine what color land gets
 	float fbm1 = fbm(base_fbm_uv);
 	float fbm2 = fbm(base_fbm_uv - light_origin*fbm1);
 	float fbm3 = fbm(base_fbm_uv - light_origin*1.5*fbm1);
 	float fbm4 = fbm(base_fbm_uv - light_origin*2.0*fbm1);
-	
+
 	float river_fbm = fbm(base_fbm_uv+fbm1*6.0);
 	river_fbm = step(river_cutoff, river_fbm);
-	
+
 	// size of edge in which colors should be dithered
 	float dither_border = (1.0/pixels)*dither_size;
 	// lots of magic numbers here
@@ -108,20 +109,20 @@ void fragment() {
 		fbm2 *= 1.05;
 		fbm3 *= 1.05;
 		fbm4 *= 1.05;
-	} 
+	}
 	if (d_light > light_border_2) {
 		fbm2 *= 1.3;
 		fbm3 *= 1.4;
 		fbm4 *= 1.8;
-		
+
 		if (d_light < light_border_2 + dither_border) {
 			if (dith || !should_dither) {
 				fbm4 *= 0.5;
 			}
 		}
-		
-	} 
-	
+
+	}
+
 	// increase contrast on d_light
 	d_light = pow(d_light, 2.0)*0.4;
 	vec4 col = colors[3];
@@ -141,5 +142,9 @@ void fragment() {
 		}
 	}
 
-	COLOR = vec4(col.rgb, a * col.a);
+	if (flash) {
+		COLOR = vec4(1.0, 1.0, 1.0, a*col.a);
+	} else {
+		COLOR = vec4(col.rgb, a * col.a);
+	}
 }

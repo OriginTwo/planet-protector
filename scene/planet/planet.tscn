@@ -1,13 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2fsu02rc373p"]
+[gd_scene load_steps=19 format=3 uid="uid://d2fsu02rc373p"]
 
 [ext_resource type="Script" path="res://scene/component/health.gd" id="1_73iow"]
 [ext_resource type="Script" path="res://scene/planet/planet.gd" id="1_a3rbr"]
 [ext_resource type="Shader" path="res://scene/planet/land.gdshader" id="2_eyqxj"]
 [ext_resource type="Script" path="res://scene/component/hurtbox.gd" id="2_swwwl"]
 [ext_resource type="Shader" path="res://scene/planet/cloud.gdshader" id="3_0jsm4"]
+[ext_resource type="Script" path="res://scene/component/shake.gd" id="5_e68gl"]
+[ext_resource type="AudioStream" uid="uid://u6isrlwdw51j" path="res://asset/planet/hurt.wav" id="7_8mbcr"]
+[ext_resource type="AudioStream" uid="uid://upwc6dniomsn" path="res://asset/planet/destroyed.wav" id="8_por5a"]
+[ext_resource type="Texture2D" uid="uid://bwvhyeous7gpa" path="res://asset/planet/destroyed_particle.png" id="9_iodpm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n6p5k"]
 shader = ExtResource("2_eyqxj")
+shader_parameter/flash = false
 shader_parameter/pixels = null
 shader_parameter/light_origin = Vector2(0.39, 0.39)
 shader_parameter/time_speed = 0.2
@@ -24,6 +29,7 @@ shader_parameter/time = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3bk1j"]
 shader = ExtResource("3_0jsm4")
+shader_parameter/flash = false
 shader_parameter/pixels = null
 shader_parameter/cloud_cover = null
 shader_parameter/light_origin = Vector2(0.39, 0.39)
@@ -40,6 +46,45 @@ shader_parameter/time = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yl5aq"]
 radius = 35.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2e3np"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Gradient" id="Gradient_yt47t"]
+offsets = PackedFloat32Array(0, 0.352459, 0.54918, 0.918033)
+colors = PackedColorArray(1, 0.768707, 0.441406, 1, 1, 0.351563, 0, 1, 1, 0.101563, 0.101563, 1, 0.25, 0.25, 0.25, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ce28n"]
+gradient = SubResource("Gradient_yt47t")
+
+[sub_resource type="Curve" id="Curve_i3320"]
+_data = [Vector2(0, 0.527472), 0.0, 0.0, 0, 0, Vector2(0.133333, 1), 0.0, 0.0, 0, 0, Vector2(0.753333, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.72671, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_or5vw"]
+curve = SubResource("Curve_i3320")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nvc2j"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 35.0
+angle_min = 1.07288e-05
+angle_max = 360.0
+spread = 180.0
+initial_velocity_min = 200.0
+initial_velocity_max = 250.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -25.0
+linear_accel_max = -10.0
+scale_min = 0.8
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_or5vw")
+color_ramp = SubResource("GradientTexture1D_ce28n")
 
 [node name="Planet" type="Node2D"]
 script = ExtResource("1_a3rbr")
@@ -61,6 +106,12 @@ script = ExtResource("1_73iow")
 hurtbox = NodePath("../Hurtbox")
 max_health = 2
 
+[node name="Shake" type="Node" parent="." node_paths=PackedStringArray("node")]
+script = ExtResource("5_e68gl")
+node = NodePath("../Visual")
+max_offset = 4.0
+decay = 4.0
+
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_mask = 0
 monitoring = false
@@ -68,3 +119,25 @@ script = ExtResource("2_swwwl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_yl5aq")
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_8mbcr")
+volume_db = -6.0
+pitch_scale = 0.8
+
+[node name="DestroyedSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_por5a")
+volume_db = -8.0
+pitch_scale = 0.7
+
+[node name="DestroyedParticle" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_2e3np")
+emitting = false
+amount = 160
+process_material = SubResource("ParticleProcessMaterial_nvc2j")
+texture = ExtResource("9_iodpm")
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.9
+randomness = 1.0
+fixed_fps = 60

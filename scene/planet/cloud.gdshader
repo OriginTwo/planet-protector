@@ -1,6 +1,7 @@
 shader_type canvas_item;
 render_mode blend_mix;
 
+uniform bool flash = false;
 uniform float pixels;
 uniform float cloud_cover : hint_range(0.0, 1.0);
 uniform vec2 light_origin;
@@ -124,5 +125,10 @@ void fragment() {
 	}
 
 	c *= step(d_to_center, 0.5);
-	COLOR = vec4(col.rgb, step(cloud_cover, c) * a * col.a);
+	
+	if (flash) {
+		COLOR = vec4(1.0, 1.0, 1.0, step(cloud_cover, c) * a * col.a);
+	} else {
+		COLOR = vec4(col.rgb, step(cloud_cover, c) * a * col.a);
+	}
 }

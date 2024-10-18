@@ -25,10 +25,16 @@ func increase_money(amount: int) -> void:
 func _ready() -> void:
 	add_to_group("game_manager")
 	
+	randomize()
+	
+	Global.game_over.connect(_on_game_over)
 	Global.upgrade_bought.connect(_on_upgrade_bought)
 	
 	set_deferred("score", 0)
-	set_deferred("money", 100000)
+	set_deferred("money", 0)
+
+func _on_game_over() -> void:
+	pass
 
 func _on_upgrade_bought(upgrade: UpgradeData) -> void:
 	var cannon := get_tree().get_first_node_in_group("cannon")

@@ -11,8 +11,8 @@
 	[ ] particle
 	[X] camera shake
 - difficulty curve
-	[ ] asteroid has more health as time goes on
-	[ ] asteroid spawn faster as time goes on
+	[X] asteroid has more health as time goes on
+	[X] asteroid spawn faster as time goes on
 - shop
 	[X] one-time-use shield (can stack) (get more expensive each time)
 	[X] more cannon max speed
@@ -23,7 +23,7 @@
 	[X] more money
 [X] game sound
 [X] ui sound
-[ ] balance upgrades
+[ ] balance + playtest
 
 [ ] main menu
 [ ] game over screen

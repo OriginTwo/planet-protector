@@ -1,5 +1,7 @@
 extends Node
 
+signal game_over()
+
 signal score_changed(new_value: int)
 signal money_changed(new_value: int)
 signal planet_health_changed(new_value: int)

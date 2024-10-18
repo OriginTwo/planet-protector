@@ -3,6 +3,8 @@ extends Node2D
 @onready var land: ColorRect = $Visual/Land
 @onready var cloud: ColorRect = $Visual/Cloud
 @onready var health: Health = $Health
+@onready var shake: Shake = $Shake
+@onready var hurtbox: Hurtbox = $Hurtbox
 
 var shader_time: float
 
@@ -11,6 +13,7 @@ func _ready() -> void:
 	
 	health.changed.connect(func(new_value: int) -> void: Global.planet_health_changed.emit(new_value))
 	health.depleted.connect(_on_health_depleted)
+	hurtbox.hurt.connect(_on_hurt)
 	
 	health.set_deferred("health", health.max_health)
 
@@ -20,8 +23,24 @@ func _process(delta: float) -> void:
 	cloud.material.set_shader_parameter("time", shader_time)
 
 func _on_health_depleted() -> void:
-	#get_tree().quit()
-	print("planet_dead")
+	$DestroyedSound.play()
+	$DestroyedParticle.emitting = true
+	Engine.set_time_scale(0.2)
+	await $DestroyedSound.finished
+	land.hide()
+	cloud.hide()
+	Global.game_over.emit()
+	Engine.set_time_scale(1)
+
+func _on_hurt(_hitbox: Hitbox) -> void:
+	HitstopManager.shake_camera(0.6)
+	shake.shake()
+	$HurtSound.play()
+	land.material.set_shader_parameter("flash", true)
+	cloud.material.set_shader_parameter("flash", true)
+	await shake.finished
+	land.material.set_shader_parameter("flash", false)
+	cloud.material.set_shader_parameter("flash", false)
 
 func randomize_visual() -> void:
 	var sd := randf_range(0, 10)
