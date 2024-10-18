@@ -49,7 +49,6 @@ func setup_space() -> void:
 	space.material.set_shader_parameter("colors", colors)
 
 func spawn_star(is_initial: bool = false) -> void:
-	await tree_entered
 	var viewport_size := get_viewport_rect().size
 	var star := STAR_SCENE.instantiate()
 	call_deferred("add_child", star)
@@ -62,4 +61,4 @@ func spawn_star(is_initial: bool = false) -> void:
 	star.modulate.a = 1.0 if is_initial else 0.0
 	if is_initial:
 		star.lifetime = randf_range(0.0, 10.0)
-	star.tree_exited.connect(spawn_star)
+	star.faded.connect(spawn_star)

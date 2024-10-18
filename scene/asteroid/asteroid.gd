@@ -26,6 +26,7 @@ func _process(delta: float) -> void:
 func _on_hurt(_hitbox: Hitbox) -> void:
 	shake.shake()
 	hurt_sound.play()
+	$HurtParticle.emitting = true
 	visual.material.set_shader_parameter("flash", true)
 	await shake.finished
 	visual.material.set_shader_parameter("flash", false)

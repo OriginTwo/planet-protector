@@ -8,7 +8,7 @@
 - hit effect
 	[X] flash
 	[X] shake
-	[ ] particle
+	[X] particle
 	[X] camera shake
 - difficulty curve
 	[X] asteroid has more health as time goes on

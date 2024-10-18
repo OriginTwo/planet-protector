@@ -1,5 +1,7 @@
 extends Node2D
 
+signal faded()
+
 const TWEEN_TIME: float = 10.0
 
 var lifetime: float
@@ -11,4 +13,5 @@ func _ready() -> void:
 	tween.tween_property(self, "modulate:a", 1.0, TWEEN_TIME)
 	tween.tween_interval(lifetime)
 	tween.tween_property(self, "modulate:a", 0.0, TWEEN_TIME)
+	tween.tween_callback(faded.emit)
 	tween.tween_callback(queue_free)
