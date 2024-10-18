@@ -20,7 +20,7 @@ func _on_play_button_pressed() -> void:
 	get_tree().change_scene_to_packed(GAME_SCENE)
 
 func _on_credit_button_pressed() -> void:
-	pass
+	get_tree().change_scene_to_file("res://scene/credit.tscn")
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()

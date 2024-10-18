@@ -24,6 +24,8 @@
 [X] game sound
 [X] ui sound
 [ ] balance + playtest
+[ ] music??
 
 [X] main menu
 [X] game over screen
+[X] credit
