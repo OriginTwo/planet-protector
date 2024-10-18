@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_8c2vb")
 name = "Planet Force Field"
-description = "Force field around the planet that breaks after 2 hit points"
+description = "Force field around the planet that breaks after 4 hit points"
 limit = 0
 price = 100
 price_multiplier = 2.0

@@ -49,7 +49,7 @@ hurtbox = NodePath("../Hurtbox")
 [node name="Shake" type="Node" parent="." node_paths=PackedStringArray("node")]
 script = ExtResource("6_skpl7")
 node = NodePath("../Visual")
-shake_duration = 0.2
+decay = 5.0
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2

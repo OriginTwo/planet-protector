@@ -1,0 +1,69 @@
+[gd_scene load_steps=13 format=3 uid="uid://ckaiamw5m7obx"]
+
+[ext_resource type="Script" path="res://scene/upgrade/force_field.gd" id="1_34u5n"]
+[ext_resource type="Script" path="res://scene/component/hurtbox.gd" id="1_y4gvj"]
+[ext_resource type="Shader" path="res://scene/upgrade/force_field.gdshader" id="2_7xp8g"]
+[ext_resource type="Script" path="res://scene/component/health.gd" id="2_oblui"]
+[ext_resource type="Script" path="res://scene/component/shake.gd" id="4_fba7n"]
+[ext_resource type="AudioStream" uid="uid://qatcwkmnebvs" path="res://asset/force_field/hurt.wav" id="6_l4jaw"]
+[ext_resource type="AudioStream" uid="uid://blyg1kpta0yj2" path="res://asset/force_field/spawned.wav" id="6_t0m8p"]
+[ext_resource type="AudioStream" uid="uid://dpuvyouwcks5u" path="res://asset/force_field/destroyed.wav" id="7_vbmgd"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_asp4y"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pl0lh"]
+width = 256
+height = 256
+seamless = true
+noise = SubResource("FastNoiseLite_asp4y")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0xqkd"]
+resource_local_to_scene = true
+shader = ExtResource("2_7xp8g")
+shader_parameter/flash = false
+shader_parameter/time = 1.0
+shader_parameter/time_scale = 0.2
+shader_parameter/noise = SubResource("NoiseTexture2D_pl0lh")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nhlkr"]
+
+[node name="ForceField" type="Node2D"]
+script = ExtResource("1_34u5n")
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Visual"]
+material = SubResource("ShaderMaterial_0xqkd")
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("hurtbox")]
+script = ExtResource("2_oblui")
+hurtbox = NodePath("../Hurtbox")
+max_health = 4
+
+[node name="Shake" type="Node" parent="." node_paths=PackedStringArray("node")]
+script = ExtResource("4_fba7n")
+node = NodePath("../Visual")
+max_offset = 3.0
+decay = 4.0
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_y4gvj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_nhlkr")
+
+[node name="SpawnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_t0m8p")
+volume_db = -6.0
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_l4jaw")
+volume_db = -6.0
+
+[node name="DestroyedSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_vbmgd")
+volume_db = -6.0

@@ -4,24 +4,27 @@ extends Node
 signal finished()
 
 @export var node: Node2D
-@export var shake_amount: float = 2.0
-@export var shake_duration: float = 0.4
+@export var max_offset: float = 2.0
+@export var decay: float = 2
 
 var original_position: Vector2
-var current_shake: float
-
-func shake() -> void:
-	current_shake = shake_amount
-	var tween := create_tween()
-	tween.tween_property(self, "current_shake", 0.0, shake_duration).from_current()
-	tween.tween_callback(finished.emit)
+var current_strength: float
+var just_shake: bool
 
 func _ready() -> void:
-	await get_tree().process_frame
-	original_position = node.position
+	set_deferred("original_position", node.position)
 
-func _process(_delta: float) -> void:
-	node.position = original_position + Vector2(
-		randf_range(-current_shake, current_shake),
-		randf_range(-current_shake, current_shake)
-	)
+func _process(delta: float) -> void:
+	if current_strength > 0:
+		node.position = original_position + Vector2(
+			randf_range(-max_offset, max_offset),
+			randf_range(-max_offset, max_offset)
+		)*current_strength
+	current_strength = max(current_strength - decay*delta, 0)
+	if just_shake && current_strength == 0:
+		just_shake = false
+		finished.emit()
+
+func shake(strength: float = 1) -> void:
+	current_strength = clamp(current_strength + strength, 0, 1)
+	just_shake = true
