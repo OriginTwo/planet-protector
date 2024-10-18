@@ -7,5 +7,5 @@ script = ExtResource("1_o21ce")
 name = "Cannon Brake"
 description = "Faster cannon brake"
 limit = 9
-price = 10
+price = 30
 price_multiplier = 1.5

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://d2ejxugad3uje"]
+[gd_scene load_steps=11 format=3 uid="uid://d2ejxugad3uje"]
 
 [ext_resource type="Theme" uid="uid://dqgtolhoyp2dd" path="res://scene/ui/ui_theme.tres" id="1_vk5dy"]
 [ext_resource type="Script" path="res://scene/ui/shop_ui.gd" id="2_tp0bc"]
 [ext_resource type="PackedScene" uid="uid://421ypswabf2u" path="res://scene/ui/upgrade_display.tscn" id="3_2jrcr"]
 [ext_resource type="Resource" uid="uid://e7m3yjgvaxad" path="res://scene/upgrade/force_field.tres" id="4_6ga7v"]
 [ext_resource type="Resource" uid="uid://bgrdbdeb1y3yi" path="res://scene/upgrade/cannon_accel.tres" id="5_o3j2w"]
+[ext_resource type="Resource" uid="uid://c8sf6t3mi5pyx" path="res://scene/upgrade/cannon_speed.tres" id="5_ppwcd"]
 [ext_resource type="Resource" uid="uid://bklr1v7p3rh1g" path="res://scene/upgrade/cannon_brake.tres" id="6_uu6dy"]
 [ext_resource type="Resource" uid="uid://4ymqruxbg0q5" path="res://scene/upgrade/cannon_rocket.tres" id="7_ybqs0"]
 [ext_resource type="Resource" uid="uid://dbu6wurniooji" path="res://scene/upgrade/cannon_fire_rate.tres" id="8_mojpt"]
@@ -43,20 +44,24 @@ upgrade_data = ExtResource("4_6ga7v")
 
 [node name="UpgradeDisplay2" parent="VBoxContainer" instance=ExtResource("3_2jrcr")]
 layout_mode = 2
-upgrade_data = ExtResource("5_o3j2w")
+upgrade_data = ExtResource("5_ppwcd")
 
 [node name="UpgradeDisplay3" parent="VBoxContainer" instance=ExtResource("3_2jrcr")]
 layout_mode = 2
-upgrade_data = ExtResource("6_uu6dy")
+upgrade_data = ExtResource("5_o3j2w")
 
 [node name="UpgradeDisplay4" parent="VBoxContainer" instance=ExtResource("3_2jrcr")]
 layout_mode = 2
-upgrade_data = ExtResource("7_ybqs0")
+upgrade_data = ExtResource("6_uu6dy")
 
 [node name="UpgradeDisplay5" parent="VBoxContainer" instance=ExtResource("3_2jrcr")]
 layout_mode = 2
-upgrade_data = ExtResource("8_mojpt")
+upgrade_data = ExtResource("7_ybqs0")
 
 [node name="UpgradeDisplay6" parent="VBoxContainer" instance=ExtResource("3_2jrcr")]
+layout_mode = 2
+upgrade_data = ExtResource("8_mojpt")
+
+[node name="UpgradeDisplay7" parent="VBoxContainer" instance=ExtResource("3_2jrcr")]
 layout_mode = 2
 upgrade_data = ExtResource("9_w2kw6")

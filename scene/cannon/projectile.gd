@@ -34,3 +34,6 @@ func _on_hitbox_hit() -> void:
 	var explosion := EXPLOSION_SCENE.instantiate()
 	get_tree().get_first_node_in_group("effects").add_child(explosion)
 	explosion.global_position = global_position
+
+func set_damage_multiplier(multiplier: float) -> void:
+	hitbox.damage = int(roundf(float(hitbox.damage)*multiplier))

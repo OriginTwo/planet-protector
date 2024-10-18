@@ -7,5 +7,5 @@ script = ExtResource("1_k3qq0")
 name = "Cannon Acceleration"
 description = "Faster cannon acceleration"
 limit = 9
-price = 10
+price = 30
 price_multiplier = 1.5

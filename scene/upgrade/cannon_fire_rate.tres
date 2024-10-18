@@ -7,5 +7,5 @@ script = ExtResource("1_y7cr5")
 name = "Cannon Fire Rate"
 description = "Faster cannon fire rate"
 limit = 9
-price = 20
-price_multiplier = 1.5
+price = 40
+price_multiplier = 1.6

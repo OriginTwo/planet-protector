@@ -14,11 +14,12 @@
 	[ ] asteroid has more health as time goes on
 	[ ] asteroid spawn faster as time goes on
 - shop
-	[ ] one-time-use shield (can stack) (get more expensive each time)
-	[ ] more damage
-	[ ] faster fire rate
-	[ ] faster cannon brake
-	[ ] faster cannon acceleration
+	[X] one-time-use shield (can stack) (get more expensive each time)
+	[X] more cannon max speed
+	[X] faster cannon acceleration
+	[X] faster cannon brake
+	[X] more damage
+	[X] faster fire rate
 	[X] more money
 [X] game sound
 [X] ui sound

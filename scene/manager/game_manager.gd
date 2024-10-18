@@ -28,23 +28,27 @@ func _ready() -> void:
 	Global.upgrade_bought.connect(_on_upgrade_bought)
 	
 	set_deferred("score", 0)
-	set_deferred("money", 1000)
+	set_deferred("money", 100000)
 
 func _on_upgrade_bought(upgrade: UpgradeData) -> void:
+	var cannon := get_tree().get_first_node_in_group("cannon")
+	
 	money -= upgrade.price
 	match upgrade.name:
 		"Planet Force Field":
 			if force_field_count == 0:
 				spawn_force_field()
 			force_field_count += 1
+		"Cannon Speed":
+			cannon.max_speed_multiplier += 0.05
 		"Cannon Acceleration":
-			print("increase cannon_accel")
+			cannon.acceleration_multiplier += 0.5
 		"Cannon Brake":
-			print("increase cannon_brake")
+			cannon.friction_multiplier += 0.5
 		"Cannon Rocket":
-			print("increase cannon_damage")
+			cannon.damage_multiplier += 2
 		"Cannon Fire Rate":
-			print("increase cannon_fire_rate")
+			cannon.shoot_cooldown_timer.wait_time -= 0.03
 		"Increase Income":
 			income_multiplier += 0.45
 

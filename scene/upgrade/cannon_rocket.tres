@@ -7,5 +7,5 @@ script = ExtResource("1_k2awi")
 name = "Cannon Rocket"
 description = "More rocket damage"
 limit = 9
-price = 15
-price_multiplier = 1.5
+price = 40
+price_multiplier = 1.6

@@ -8,4 +8,4 @@ name = "Increase Income"
 description = "Increase income from destroying asteroids"
 limit = 9
 price = 50
-price_multiplier = 2.0
+price_multiplier = 1.75
