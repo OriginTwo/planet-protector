@@ -16,12 +16,12 @@
 - shop
 	[ ] one-time-use shield (can stack) (get more expensive each time)
 	[ ] more damage
-	[ ] 15 seconds fire rate boost
-	[ ] 20 seconds score boost
+	[ ] faster fire rate
 	[ ] faster cannon brake
 	[ ] faster cannon acceleration
-	[ ] aoe damage when projectile explode
-[X] sound
+	[ ] money boost
+[X] game sound
+[ ] ui sound
 
 [ ] main menu
 [ ] game over screen

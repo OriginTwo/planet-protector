@@ -9,7 +9,10 @@ var shader_time: float
 func _ready() -> void:
 	randomize_visual()
 	
+	health.changed.connect(func(new_value: int) -> void: Global.planet_health_changed.emit(new_value))
 	health.depleted.connect(_on_health_depleted)
+	
+	health.set_deferred("health", health.max_health)
 
 func _process(delta: float) -> void:
 	shader_time += delta

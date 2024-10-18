@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2ejxugad3uje"]
+[gd_scene load_steps=10 format=3 uid="uid://d2ejxugad3uje"]
 
 [ext_resource type="Theme" uid="uid://dqgtolhoyp2dd" path="res://scene/ui/ui_theme.tres" id="1_vk5dy"]
 [ext_resource type="Script" path="res://scene/ui/shop_ui.gd" id="2_tp0bc"]
+[ext_resource type="PackedScene" uid="uid://421ypswabf2u" path="res://scene/ui/upgrade_display.tscn" id="3_2jrcr"]
+[ext_resource type="Resource" uid="uid://e7m3yjgvaxad" path="res://scene/upgrade/force_field.tres" id="4_6ga7v"]
+[ext_resource type="Resource" uid="uid://bgrdbdeb1y3yi" path="res://scene/upgrade/cannon_accel.tres" id="5_o3j2w"]
+[ext_resource type="Resource" uid="uid://bklr1v7p3rh1g" path="res://scene/upgrade/cannon_brake.tres" id="6_uu6dy"]
+[ext_resource type="Resource" uid="uid://4ymqruxbg0q5" path="res://scene/upgrade/cannon_rocket.tres" id="7_ybqs0"]
+[ext_resource type="Resource" uid="uid://dbu6wurniooji" path="res://scene/upgrade/cannon_fire_rate.tres" id="8_mojpt"]
+[ext_resource type="Resource" uid="uid://dl2lva5udr1wv" path="res://scene/upgrade/increase_income.tres" id="9_w2kw6"]
 
 [node name="ShopUI" type="PanelContainer"]
 offset_right = 113.0
@@ -25,326 +32,31 @@ text = "  Money: 999999"
 [node name="PlanetHitPointLabel" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "  Planet Hit Point: 2"
+text = "  Planet Hit Point: 999"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="UpgradePanel" type="PanelContainer" parent="VBoxContainer"]
+[node name="UpgradeDisplay" parent="VBoxContainer" instance=ExtResource("3_2jrcr")]
 layout_mode = 2
+upgrade_data = ExtResource("4_6ga7v")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UpgradePanel"]
+[node name="UpgradeDisplay2" parent="VBoxContainer" instance=ExtResource("3_2jrcr")]
 layout_mode = 2
-theme_override_constants/separation = 0
+upgrade_data = ExtResource("5_o3j2w")
 
-[node name="ForceFieldUpgradeButton" type="Button" parent="VBoxContainer/UpgradePanel/HBoxContainer"]
-unique_name_in_owner = true
+[node name="UpgradeDisplay3" parent="VBoxContainer" instance=ExtResource("3_2jrcr")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 10.0
-focus_mode = 0
-text = "Planet Force Field"
+upgrade_data = ExtResource("6_uu6dy")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/UpgradePanel/HBoxContainer"]
-custom_minimum_size = Vector2(40, 0)
+[node name="UpgradeDisplay4" parent="VBoxContainer" instance=ExtResource("3_2jrcr")]
 layout_mode = 2
-theme_override_constants/separation = 0
+upgrade_data = ExtResource("7_ybqs0")
 
-[node name="ForceFieldPriceLabel" type="Label" parent="VBoxContainer/UpgradePanel/HBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="UpgradeDisplay5" parent="VBoxContainer" instance=ExtResource("3_2jrcr")]
 layout_mode = 2
-size_flags_vertical = 6
-text = "999999"
-horizontal_alignment = 1
-vertical_alignment = 1
+upgrade_data = ExtResource("8_mojpt")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UpgradePanel/HBoxContainer/VBoxContainer"]
+[node name="UpgradeDisplay6" parent="VBoxContainer" instance=ExtResource("3_2jrcr")]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 0
-
-[node name="ForceFieldLimitLabel" type="Label" parent="VBoxContainer/UpgradePanel/HBoxContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(16, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
-text = "-"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DescriptionLabel" type="Label" parent="VBoxContainer/UpgradePanel/HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(12, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-tooltip_text = "Force field around the planet that breaks after 2 hit points"
-mouse_filter = 0
-text = "?"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="UpgradePanel2" type="PanelContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UpgradePanel2"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="CannonAccelUpgradeButton" type="Button" parent="VBoxContainer/UpgradePanel2/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 10.0
-focus_mode = 0
-text = "Cannon Acceleration"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/UpgradePanel2/HBoxContainer"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="CannonAccelPriceLabel" type="Label" parent="VBoxContainer/UpgradePanel2/HBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 6
-text = "999999"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UpgradePanel2/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 0
-
-[node name="CannonAccelLimitLabel" type="Label" parent="VBoxContainer/UpgradePanel2/HBoxContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(16, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
-text = "0/9"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DescriptionLabel" type="Label" parent="VBoxContainer/UpgradePanel2/HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(12, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-tooltip_text = "Faster cannon acceleration"
-mouse_filter = 0
-text = "?"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="UpgradePanel3" type="PanelContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UpgradePanel3"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="CannonBrakeUpgradeButton" type="Button" parent="VBoxContainer/UpgradePanel3/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 10.0
-focus_mode = 0
-text = "Cannon Brake"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/UpgradePanel3/HBoxContainer"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="CannonBrakePriceLabel" type="Label" parent="VBoxContainer/UpgradePanel3/HBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 6
-text = "999999"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UpgradePanel3/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 0
-
-[node name="CannonBrakeLimitLabel" type="Label" parent="VBoxContainer/UpgradePanel3/HBoxContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(16, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
-text = "0/9"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DescriptionLabel" type="Label" parent="VBoxContainer/UpgradePanel3/HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(12, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-tooltip_text = "Faster cannon brake"
-mouse_filter = 0
-text = "?"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="UpgradePanel4" type="PanelContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UpgradePanel4"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="CannonRocketUpgradeButton" type="Button" parent="VBoxContainer/UpgradePanel4/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 10.0
-focus_mode = 0
-text = "Cannon Rocket"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/UpgradePanel4/HBoxContainer"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="CannonRocketPriceLabel" type="Label" parent="VBoxContainer/UpgradePanel4/HBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 6
-text = "999999"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UpgradePanel4/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 0
-
-[node name="CannonRocketLimitLabel" type="Label" parent="VBoxContainer/UpgradePanel4/HBoxContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(16, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
-text = "0/9"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DescriptionLabel" type="Label" parent="VBoxContainer/UpgradePanel4/HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(12, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-tooltip_text = "More rocket damage"
-mouse_filter = 0
-text = "?"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="UpgradePanel5" type="PanelContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UpgradePanel5"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="CannonFireRateUpgradeButton" type="Button" parent="VBoxContainer/UpgradePanel5/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 10.0
-focus_mode = 0
-text = "Cannon Fire Rate"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/UpgradePanel5/HBoxContainer"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="CannonFireRatePriceLabel" type="Label" parent="VBoxContainer/UpgradePanel5/HBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 6
-text = "999999"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UpgradePanel5/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 0
-
-[node name="CannonFireRateLimitLabel" type="Label" parent="VBoxContainer/UpgradePanel5/HBoxContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(16, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
-text = "0/9"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DescriptionLabel" type="Label" parent="VBoxContainer/UpgradePanel5/HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(12, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-tooltip_text = "Faster cannon fire rate"
-mouse_filter = 0
-text = "?"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="UpgradePanel6" type="PanelContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UpgradePanel6"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="IncreaseIncomeUpgradeButton" type="Button" parent="VBoxContainer/UpgradePanel6/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 10.0
-tooltip_text = "Increase income from destroying asteroids"
-focus_mode = 0
-text = "Increase Income"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/UpgradePanel6/HBoxContainer"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="IncreaseIncomePriceLabel" type="Label" parent="VBoxContainer/UpgradePanel6/HBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 6
-text = "999999"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UpgradePanel6/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 0
-
-[node name="IncreaseIncomeLimitLabel" type="Label" parent="VBoxContainer/UpgradePanel6/HBoxContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(16, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
-text = "0/9"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DescriptionLabel" type="Label" parent="VBoxContainer/UpgradePanel6/HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(12, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-tooltip_text = "Temporarily boost "
-mouse_filter = 0
-text = "?"
-horizontal_alignment = 1
-vertical_alignment = 1
+upgrade_data = ExtResource("9_w2kw6")

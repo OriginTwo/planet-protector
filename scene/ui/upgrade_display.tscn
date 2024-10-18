@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://421ypswabf2u"]
+
+[ext_resource type="Theme" uid="uid://dqgtolhoyp2dd" path="res://scene/ui/ui_theme.tres" id="1_3ad6e"]
+[ext_resource type="Script" path="res://scene/ui/upgrade_display.gd" id="2_7a7ry"]
+
+[node name="UpgradeDisplay" type="PanelContainer"]
+theme = ExtResource("1_3ad6e")
+script = ExtResource("2_7a7ry")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UpgradeButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 10.0
+focus_mode = 0
+disabled = true
+text = "Upgrade Name"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PriceLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+text = "999999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="LimitLabel" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Upgrade Description"
+mouse_filter = 0
+text = "?"
+horizontal_alignment = 1
+vertical_alignment = 1

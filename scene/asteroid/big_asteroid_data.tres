@@ -9,6 +9,8 @@
 script = ExtResource("1_js3d7")
 health = 3
 score_amount = 5
+money_amount = 5
+damage = 3
 radius = 16.0
 linear_speed = 15.0
 angular_speed = 0.785

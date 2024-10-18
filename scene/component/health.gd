@@ -1,7 +1,7 @@
 class_name Health
 extends Node
 
-signal changed()
+signal changed(new_value: int)
 signal depleted()
 
 @export var hurtbox: Hurtbox
@@ -14,7 +14,7 @@ signal depleted()
 @onready var health := max_health :
 	set(value):
 		health = clamp(value, 0, max_health)
-		changed.emit()
+		changed.emit(health)
 		if health == 0:
 			depleted.emit()
 

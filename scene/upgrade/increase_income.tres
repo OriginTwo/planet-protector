@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=2 format=3 uid="uid://dl2lva5udr1wv"]
+
+[ext_resource type="Script" path="res://scene/ui/upgrade_data.gd" id="1_hxyk1"]
+
+[resource]
+script = ExtResource("1_hxyk1")
+name = "Increase Income"
+description = "Increase income from destroying asteroids"
+limit = 9
+price = 50
+price_multiplier = 2.0

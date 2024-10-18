@@ -1,5 +1,8 @@
 extends Node
 
-const PLANET_RADIUS: float = 35
+signal score_changed(new_value: int)
+signal money_changed(new_value: int)
+signal planet_health_changed(new_value: int)
+signal upgrade_bought(upgrade: UpgradeData)
 
-var score: int = 0
+const PLANET_RADIUS: float = 35

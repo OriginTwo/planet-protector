@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var game_manager: GameManager = get_tree().get_first_node_in_group("game_manager")
+
 @onready var visual: ColorRect = $Visual/ColorRect
 @onready var health: Health = $Health
 @onready var hurtbox: Hurtbox = $Hurtbox
@@ -8,18 +10,18 @@ extends Node2D
 @onready var hurt_sound: AudioStreamPlayer = $HurtSound
 @onready var destroyed_sound: AudioStreamPlayer = $DestroyedSound
 
-var linear_speed: float
-var angular_speed: float
-var score_amount: int
+var data: AsteroidSizeData
 
 func _ready() -> void:
 	health.depleted.connect(_on_destroyed)
 	hurtbox.hurt.connect(_on_hurt)
 	hitbox.hit.connect(_on_hit)
+	
+	call_deferred("setup")
 
 func _process(delta: float) -> void:
-	global_position += (-global_position).normalized()*linear_speed*delta
-	global_rotation += angular_speed*delta
+	global_position += (-global_position).normalized()*data.linear_speed*delta
+	global_rotation += data.angular_speed*delta
 
 func _on_hurt(_hitbox: Hitbox) -> void:
 	shake.shake()
@@ -30,8 +32,8 @@ func _on_hurt(_hitbox: Hitbox) -> void:
 
 func _on_destroyed() -> void:
 	HitstopManager.shake_camera()
-	
-	Global.score += score_amount
+	game_manager.score += data.score_amount
+	game_manager.money += data.money_amount
 	destroyed_sound.play()
 	visual.hide()
 	hitbox.set_enabled(false)
@@ -42,14 +44,17 @@ func _on_destroyed() -> void:
 func _on_hit() -> void:
 	queue_free()
 
-func setup(radius: float, mask: Texture2D) -> void:
-	$Hurtbox/CollisionShape2D.shape.radius = radius
-	$Hitbox/CollisionShape2D.shape.radius = radius
+func setup() -> void:
+	health.max_health = data.health
 	
-	visual.size = Vector2(radius*2, radius*2)
-	visual.position = Vector2(-radius, -radius)
-	visual.material.set_shader_parameter("mask", mask)
-	visual.material.set_shader_parameter("pixels", radius*2)
+	hitbox.damage = data.damage
+	$Hurtbox/CollisionShape2D.shape.radius = data.radius
+	$Hitbox/CollisionShape2D.shape.radius = data.radius
+	
+	visual.size = Vector2(data.radius*2, data.radius*2)
+	visual.position = Vector2(-data.radius, -data.radius)
+	visual.material.set_shader_parameter("mask", data.mask_textures.pick_random())
+	visual.material.set_shader_parameter("pixels", data.radius*2)
 	visual.material.set_shader_parameter("light_origin", Vector2(0, 0))
 	visual.material.set_shader_parameter("size", randf_range(1.5, 1.7))
 	visual.material.set_shader_parameter("octaves", 20)

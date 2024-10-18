@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=2 format=3 uid="uid://4ymqruxbg0q5"]
+
+[ext_resource type="Script" path="res://scene/ui/upgrade_data.gd" id="1_k2awi"]
+
+[resource]
+script = ExtResource("1_k2awi")
+name = "Cannon Rocket"
+description = "More rocket damage"
+limit = 9
+price = 15
+price_multiplier = 1.5
